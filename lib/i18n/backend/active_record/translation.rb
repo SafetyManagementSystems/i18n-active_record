@@ -105,7 +105,7 @@ module I18n
         def value
           value = read_attribute(:value)
           if is_proc
-            Kernel.eval(value)
+            Kernel.eval(value) if value.present?
           elsif value == FALSY_CHAR
             false
           elsif value == TRUTHY_CHAR
