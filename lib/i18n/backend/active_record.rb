@@ -91,7 +91,7 @@ module I18n
           if self.class.config.cache_translations
             keys = ([locale] + key.split(I18n::Backend::Flatten::FLATTEN_SEPARATOR)).map(&:to_sym)
 
-            return translations.dig(*keys)
+            return keys.reduce(translations) { |acc, e| acc.is_a?(Hash) ? acc[e] : nil }
           end
 
           result = if key == ''
